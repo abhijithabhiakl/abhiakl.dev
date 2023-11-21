@@ -249,8 +249,8 @@ tr td br {
 
 .img-frame {
 	position: relative;
-	width: 260px;
-	height: 260px;
+	width: 250px;
+	height: 250px;
 	margin: 0 0 10px 0;
 	border-radius: 50% ;
 	overflow: hidden;
