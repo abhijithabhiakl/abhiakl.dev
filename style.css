@@ -382,5 +382,6 @@ tr td br {
 	}
 	.resumepdf {
 	   width: 100%;
+	   height: 800px;
 	}
  }
