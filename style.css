@@ -159,8 +159,8 @@ button:hover {
 	display: block;
 	height: 26px;
 	width: 60px;
-	background: var(--white);
-	border: 2px solid var(--gray);
+	background: var(--black);
+	border: 2px solid var(--white);
 	border-radius: 15px;
 	position: absolute;
 	top: 0px;
@@ -171,8 +171,8 @@ button:hover {
 	display: block;
 	height: 20px;
 	width: 20px;
-	background: var(--gray);
-	border: 2px solid var(--white);
+	background: var(--white);
+	border: 2px solid var(--black);
 	border-radius: 50%;
 	position: absolute;
 	top: 3px;
@@ -180,13 +180,13 @@ button:hover {
 	transition: all 0.4s ease-in;
 }
 .dark-mode-toggler input[type="checkbox"]:checked + label::before {
-	background: var(--black);
-	border: 2px solid var(--white);
+	background: var(--white);
+	border: 2px solid var(--black);
 }
 .dark-mode-toggler input[type="checkbox"]:checked + label::after {
 	left: -28px;
-	background: var(--black);
-	border: 2px solid var(--white);
+	background: var(--white);
+	border: 2px solid var(--black);
 	transition: all 0.4s ease-in;
 }
 
