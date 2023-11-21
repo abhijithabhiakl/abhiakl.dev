@@ -249,10 +249,10 @@ tr td br {
 
 .img-frame {
 	position: relative;
-	width: 300px;
-	height: 300px;
+	width: 260px;
+	height: 260px;
 	margin: 0 0 10px 0;
-	border-radius: 50%;
+	border-radius: 50% ;
 	overflow: hidden;
 }
 .img-frame img {
@@ -261,7 +261,7 @@ tr td br {
 	left: 50%;
 	-webkit-transform: translate(-50%, -50%);
 	transform: translate(-50%, -50%);
-	height: 100%;
+	width: 100%;
 }
 
 .links {
