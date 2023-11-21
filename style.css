@@ -363,3 +363,15 @@ tr td br {
 .bio.show {
 	display: block;
 }
+#footer{
+	text-align: center;
+	padding:6% 15% 6%;
+  }
+.ico{
+	padding: 0 0.5% 0.5%;
+	opacity: 0.8;
+  }
+.copyright{
+	opacity: 0.5;
+	font-family: "Montserrat", sans-serif;
+  }
