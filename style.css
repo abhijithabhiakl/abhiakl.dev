@@ -357,6 +357,8 @@ tr td br {
 	display: none;
 	line-height: 1.6;
 	font-size: clamp(1rem, 0.96rem + 0.22vw, 1.125rem);
+	text-align: justify;
+	text-justify: inter-word;
 }
 .bio.show {
 	display: block;
