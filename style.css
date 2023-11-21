@@ -375,3 +375,12 @@ tr td br {
 	opacity: 0.5;
 	font-family: "Montserrat", sans-serif;
   }
+@media only screen and (max-width: 650px) {
+	body {
+	   margin: 0;
+	   padding: 0;
+	}
+	.resumepdf {
+	   width: 100%;
+	}
+ }
