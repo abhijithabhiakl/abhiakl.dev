@@ -181,12 +181,12 @@ button:hover {
 }
 .dark-mode-toggler input[type="checkbox"]:checked + label::before {
 	background: var(--white);
-	border: 2px solid var(--black);
+	border: 2px solid var(--gray);
 }
 .dark-mode-toggler input[type="checkbox"]:checked + label::after {
 	left: -28px;
 	background: var(--white);
-	border: 2px solid var(--black);
+	border: 2px solid var(--gray);
 	transition: all 0.4s ease-in;
 }
 
@@ -363,17 +363,36 @@ tr td br {
 .bio.show {
 	display: block;
 }
-#footer{
+/* #footer{
 	text-align: center;
 	padding:6% 15% 6%;
   }
 .ico{
 	padding: 0 0.5% 0.5%;
 	opacity: 0.8;
+  } */
+
+#footer {
+    text-align: center;
+	padding-top: 5%;
+    padding: 4% 5% 4%;
+  }
+.ico {
+    padding: 0 0.85% 0.85%;
+    opacity: 0.8;
+  }
+.ico1 {
+    color: rgb(78, 125, 255);
+  }
+.ico2 {
+    color: rgb(251, 41, 58);
+  }
+.ico3 {
+    color: rgb(165, 165, 165);
   }
 .copyright{
 	opacity: 0.5;
-	font-family: "Montserrat", sans-serif;
+	/* font-family: "Montserrat", sans-serif; */
   }
 @media only screen and (max-width: 650px) {
 	body {
