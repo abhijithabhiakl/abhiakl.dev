@@ -115,7 +115,7 @@ button:hover {
 .container {
 	margin: 50px auto;
 	padding: 5px;
-	max-width: 750px;
+	max-width: 600px;
 }
 @media (max-width: 600px) {
 	.container {
