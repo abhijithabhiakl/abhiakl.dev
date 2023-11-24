@@ -16,13 +16,14 @@ let colors = ["#24d05a", "#e4094b", "#10a2f5", "#e9bc3f"];
 	}, 5000);
 })();
 
-/* Dark Mode */
+/* Dark Mode & Readme jokes theme change according to page theme change*/
 
 function setModeEventListener() {
 	let list = document.body.classList;
 	list.add("dark-mode");
 	document.getElementById("toggler").addEventListener("change", (event) => {
 		event.target.checked ? list.remove("dark-mode") : list.add("dark-mode");
+		event.target.checked ? document.getElementById("readmejokes").src = `https://readme-jokes.vercel.app/api?bgColor=%23efefefb3&textColor=%23a4a4a4&borderColor=%23a4a4a4&qColor=%23252525&aColor=%23ff0836`: document.getElementById("readmejokes").src = `https://readme-jokes.vercel.app/api?bgColor=%23252525&textColor=%23a4a4a4&aColor=%23a4a4a4&borderColor=%23efefefb3&qColor=%23ff0836`;
 	});
 }
 
