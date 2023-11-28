@@ -395,3 +395,13 @@ tr td br {
 		font-family: "Montserrat", sans-serif;
 	  }
  }
+
+.iframe {
+	width: 48%; /* Adjust the width as needed */
+  }
+
+#iframeContainer {
+	display: flex;
+	justify-content: space-between; /* Adjust as needed */
+	margin: 10px;
+  }
