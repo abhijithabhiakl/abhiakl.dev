@@ -402,6 +402,5 @@ tr td br {
 
 #iframeContainer {
 	display: flex;
-	justify-content: space-between; /* Adjust as needed */
-	margin: 10px;
+	justify-content:center; /* Adjust as needed */
   }
