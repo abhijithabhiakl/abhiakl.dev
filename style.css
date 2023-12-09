@@ -396,10 +396,6 @@ tr td br {
 	  }
  }
 
-.iframe {
-	width: 48%; /* Adjust the width as needed */
-  }
-
 #iframeContainer {
 	display: flex;
 	justify-content:center; /* Adjust as needed */
