@@ -4,6 +4,9 @@ async function generateOGImage() {
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
 
+    const client = await page.target().createCDPSession();
+    await client.send('Network.clearBrowserCookies');
+
     const websiteUrl = 'https://abhiakl.xyz';
 
     // Navigate to your website
