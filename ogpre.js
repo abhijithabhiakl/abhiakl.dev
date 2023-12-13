@@ -1,16 +1,13 @@
 const puppeteer = require('puppeteer');
-
-// const image = document.querySelector('img[src="./img/og_image.png"]');
-// if (image) {
-//   image.remove();   build fail
-// }
+const fs = require('fs');
 
 async function generateOGImage() {
+
+    if (fs.existsSync('og_image.png')) {
+        fs.unlinkSync('og_image.png');
+    }
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
-
-    const client = await page.target().createCDPSession();
-    await client.send('Network.clearBrowserCookies');
 
     const websiteUrl = 'https://abhiakl.xyz';
 
@@ -19,7 +16,7 @@ async function generateOGImage() {
 
     // Set the viewport size to the desired image dimensions
     await page.setViewport({ width: 1300, height: 730 });
-
+    
     // Capture a screenshot of the rendered HTML
     await page.screenshot({ path: './img/og_image.png' });
 
