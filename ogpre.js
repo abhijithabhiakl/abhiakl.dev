@@ -13,7 +13,7 @@ async function generateOGImage() {
     await page.setViewport({ width: 1200, height: 630 });
 
     // Capture a screenshot of the rendered HTML
-    await page.screenshot({ path: 'og_image.png' });
+    await page.screenshot({ path: './img/og_image.png' });
 
     await browser.close();
 }
