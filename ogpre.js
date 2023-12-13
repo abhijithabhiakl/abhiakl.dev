@@ -1,6 +1,6 @@
 const puppeteer = require('puppeteer');
 
-const image = document.querySelector('./img/og_image.png');
+const image = document.querySelector('img[src="./img/og_image.png"]');
 if (image) {
   image.remove();
 }
