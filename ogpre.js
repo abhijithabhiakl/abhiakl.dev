@@ -13,7 +13,7 @@ async function generateOGImage() {
     await page.goto(websiteUrl, { waitUntil: 'domcontentloaded' });
 
     // Set the viewport size to the desired image dimensions
-    await page.setViewport({ width: 1200, height: 630 });
+    await page.setViewport({ width: 1200, height: 730 });
 
     // Capture a screenshot of the rendered HTML
     await page.screenshot({ path: './img/og_image.png' });
