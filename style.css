@@ -394,6 +394,9 @@ tr td br {
 		font-size: 10px;
 		font-family: "Montserrat", sans-serif;
 	  }
+	#iframeContainer{
+		width: 100;
+	}
  }
 
 #iframeContainer {
