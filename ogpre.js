@@ -3,8 +3,8 @@ const fs = require('fs');
 
 async function generateOGImage() {
 
-    if (fs.existsSync('og_image.png')) {
-        fs.unlinkSync('og_image.png');
+    if (fs.existsSync('./img/og_image.png')) {
+        fs.unlinkSync('./img/og_image.png');
     }
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
