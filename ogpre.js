@@ -1,9 +1,9 @@
 const puppeteer = require('puppeteer');
 
-const image = document.querySelector('img[src="./img/og_image.png"]');
-if (image) {
-  image.remove();
-}
+// const image = document.querySelector('img[src="./img/og_image.png"]');
+// if (image) {
+//   image.remove();   build fail
+// }
 
 async function generateOGImage() {
     const browser = await puppeteer.launch();
