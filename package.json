@@ -1,0 +1,23 @@
+{
+  "name": "abhiakl.dev",
+  "version": "1.0.0",
+  "description": "for og image",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "node ogpre.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abhijithabhiakl/abhiakl.dev.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/abhijithabhiakl/abhiakl.dev/issues"
+  },
+  "homepage": "https://github.com/abhijithabhiakl/abhiakl.dev#readme",
+  "dependencies": {
+    "puppeteer": "^21.6.1"
+  }
+}
