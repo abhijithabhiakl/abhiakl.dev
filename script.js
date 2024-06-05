@@ -46,9 +46,9 @@ function setColorHoverListener() {
 }
 
 /* Photos */
-
+// change the number multiplied by the math.random to change how many photos to cycle
 function setRandomPhoto() {
-	let num = Math.floor(Math.random() * 3) + 1;
+	let num = Math.floor(Math.random() * 2) + 1;
 	document.getElementById("propic").src = `./img/face${num}.jpg`;
 }
 
