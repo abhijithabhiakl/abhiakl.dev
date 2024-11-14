@@ -446,4 +446,36 @@ h2 br {
   
   /* <!-- dynamic text --> */
 
+  /* rgb text */
+  #dynamic-text {
+	background: linear-gradient(90deg, 
+    #ff4d4d, #ff704d, #ff8c4d, #ff9f4d, #ffcc66, 
+    #ffff66, #99e699, #66e066, #66cc99, #66ccff, 
+    #6699ff, #3366cc, #5c33cc, #8033cc, #a033cc, 
+    #cc33cc, #ff33ff, #ff3399, #ff3366);
+	background-size: 400%; /* Spread the gradient wider */
+	background-size: 500%; /* Spread the gradient for smoother transitions */
   
+	/* Standard background-clip */
+	background-clip: text;
+	/* Vendor prefixes for older browser support */
+	-webkit-background-clip: text;  /* Safari and Chrome */
+	-moz-background-clip: text;     /* Firefox */
+	-webkit-text-fill-color: transparent; /* For Chrome and Safari */
+
+	animation: rgb-flow 20s ease-in-out infinite; /* Slower animation with smoother transitions */
+	opacity: 0.95; /* Subtle transparency to reduce intensity */
+
+
+  }
+  
+  @keyframes rgb-flow {
+	0% {
+	  background-position: 200% 0; /* Start off-screen to the left */
+	}
+	100% {
+	  background-position: -200% 0; /* End off-screen to the right */
+	}
+  }
+  
+    /* rgb text */
