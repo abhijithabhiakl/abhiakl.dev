@@ -78,3 +78,39 @@ function off() {
 		e.classList.remove("show");
 	});
 }
+// <!-- dynamic text -->
+const textArray = ["Hardware Developer", "Network Specialist", "Maker & Tinkerer", "DIY Hobbyist"];
+let textIndex = 0;
+let charIndex = 0;
+const typingSpeed = 100;
+const deletingSpeed = 50;
+const pauseTime = 2000; // Pause before deleting
+
+function typeText() {
+  const textElement = document.getElementById("dynamic-text");
+  const currentText = textArray[textIndex];
+
+  if (charIndex < currentText.length) {
+    textElement.textContent += currentText.charAt(charIndex);
+    charIndex++;
+    setTimeout(typeText, typingSpeed);
+  } else {
+    setTimeout(deleteText, pauseTime);
+  }
+}
+
+function deleteText() {
+  const textElement = document.getElementById("dynamic-text");
+  if (charIndex > 0) {
+    textElement.textContent = textElement.textContent.slice(0, -1);
+    charIndex--;
+    setTimeout(deleteText, deletingSpeed);
+  } else {
+    textIndex = (textIndex + 1) % textArray.length;
+    setTimeout(typeText, typingSpeed);
+  }
+}
+
+// Start the typing effect
+typeText();
+// <!-- dynamic text -->

@@ -123,17 +123,6 @@ button:hover {
 	}
 }
 
-.header-section {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	flex-wrap: wrap;
-}
-
-.header-frame {
-	max-width: 350px;
-}
-
 .go-home {
 	position: fixed;
 	top: 5px;
@@ -403,3 +392,90 @@ tr td br {
 	display: flex;
 	justify-content:center; /* Adjust as needed */
   }
+
+  /* <!-- dynamic text and the header section --> */
+
+.header-section {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-wrap: wrap;
+  }
+  
+  .header-frame {
+	max-width: 350px;
+	flex: 1;
+  }
+  
+  .img-frame {
+	width: 250px; /* Double the width */
+	height: 250px; /* Double the height */
+	overflow: hidden;
+	flex-shrink: 0; /* Prevent shrinking */
+  }
+  
+  #propic {
+	width: 100%; /* Ensure the image fills the container */
+	height: 100%; /* Ensure the image fills the container */
+	object-fit: cover; /* Ensure the image maintains aspect ratio and covers the area */
+  }
+  
+  .cursor {
+	display: inline-block;
+	width: 1ch;
+	animation: blink 0.7s steps(1) infinite;
+  }
+  
+  @keyframes blink {
+	50% {
+	  opacity: 0;
+	}
+  }
+
+h2 {
+	line-height: 1.2; /* Adjust line-height to reduce spacing between lines */
+	letter-spacing: -0.05em; /* Adjust letter spacing */
+}
+
+h2 br {
+	margin-bottom: 0; /* Remove extra margin after the <br> */
+}
+
+  
+  
+  
+  /* <!-- dynamic text --> */
+
+  /* rgb text */
+  #dynamic-text {
+	background: linear-gradient(90deg, 
+    #ff4d4d, #ff704d, #ff8c4d, #ff9f4d, #ffcc66, 
+    #ffff66, #99e699, #66e066, #66cc99, #66ccff, 
+    #6699ff, #3366cc, #5c33cc, #8033cc, #a033cc, 
+    #cc33cc, #ff33ff, #ff3399, #ff3366);
+	background-size: 400%; /* Spread the gradient wider */
+	background-size: 500%; /* Spread the gradient for smoother transitions */
+  
+	/* Standard background-clip */
+	background-clip: text;
+	/* Vendor prefixes for older browser support */
+	-webkit-background-clip: text;  /* Safari and Chrome */
+	-moz-background-clip: text;     /* Firefox */
+	-webkit-text-fill-color: transparent; /* For Chrome and Safari */
+
+	animation: rgb-flow 20s ease-in-out infinite; /* Slower animation with smoother transitions */
+	opacity: 0.95; /* Subtle transparency to reduce intensity */
+
+
+  }
+  
+  @keyframes rgb-flow {
+	0% {
+	  background-position: 200% 0; /* Start off-screen to the left */
+	}
+	100% {
+	  background-position: -200% 0; /* End off-screen to the right */
+	}
+  }
+  
+    /* rgb text */
