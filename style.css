@@ -447,35 +447,34 @@ h2 br {
   /* <!-- dynamic text --> */
 
   /* rgb text */
-  #dynamic-text {
+  #rgb_text {
 	background: linear-gradient(90deg, 
-    #ff4d4d, #ff704d, #ff8c4d, #ff9f4d, #ffcc66, 
-    #ffff66, #99e699, #66e066, #66cc99, #66ccff, 
-    #6699ff, #3366cc, #5c33cc, #8033cc, #a033cc, 
-    #cc33cc, #ff33ff, #ff3399, #ff3366);
-	background-size: 400%; /* Spread the gradient wider */
-	background-size: 500%; /* Spread the gradient for smoother transitions */
-  
-	/* Standard background-clip */
+	  #FF0000, #FF5500, #FFAA00, #FFD500, 
+	  #FFFF00, #AAFF00, #55FF00, #00FF00, 
+	  #00FF55, #00FFAA, #00b7ff, #0055FF, 
+	  #003cff, #5500FF, #AA00FF, #FF00AA, #FF0000
+	);
+	background-size: 1200%; /* Increase to make transitions smoother */
+	
+	/* Apply gradient to text only */
 	background-clip: text;
-	/* Vendor prefixes for older browser support */
-	-webkit-background-clip: text;  /* Safari and Chrome */
-	-moz-background-clip: text;     /* Firefox */
-	-webkit-text-fill-color: transparent; /* For Chrome and Safari */
-
-	animation: rgb-flow 20s ease-in-out infinite; /* Slower animation with smoother transitions */
-	opacity: 0.95; /* Subtle transparency to reduce intensity */
-
-
+	-webkit-background-clip: text;
+	-moz-background-clip: text;
+	-webkit-text-fill-color: transparent;
+  
+	/* Animation settings */
+	animation: rgb-flow 40s linear infinite; /* Increase duration for smoother loop */
+	opacity: 0.95;
   }
   
   @keyframes rgb-flow {
 	0% {
-	  background-position: 200% 0; /* Start off-screen to the left */
+	  background-position: 0% 0;
 	}
 	100% {
-	  background-position: -200% 0; /* End off-screen to the right */
+	  background-position: -1000% 0; /* Adjusted to match background size for smooth looping */
 	}
   }
+  
   
     /* rgb text */

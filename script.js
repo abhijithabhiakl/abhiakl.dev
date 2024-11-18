@@ -79,7 +79,7 @@ function off() {
 	});
 }
 // <!-- dynamic text -->
-const textArray = ["Hardware Developer", "Network Specialist", "Maker & Tinkerer", "DIY Hobbyist"];
+const textArray = ["Hardware Developer", "Network Technician", "Maker & Tinkerer", "DIY Hobbyist"];
 let textIndex = 0;
 let charIndex = 0;
 const typingSpeed = 100;
