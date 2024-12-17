@@ -2,7 +2,6 @@
     font-family: 'OCRaStd';
     font-style: normal;
     font-display: swap;
-    font-weight: 400;
     src: url('./fonts/ocra.ttf') format('truetype');
 }
 
@@ -81,7 +80,10 @@ body {
 
 body,
 button {
-	font-family: "OCRaStd", monospace;
+	font-family: "iA Writer Mono", monospace;
+}
+h1,h2,h3 {
+	font-family:"OCRaStd";
 }
 
 ::selection {
