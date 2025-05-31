@@ -1,29 +1,34 @@
 const puppeteer = require('puppeteer');
 const fs = require('fs');
+const path = require('path');
 
-if (fs.existsSync('./img/og_image.png')) {
-    fs.unlinkSync('./img/og_image.png');
+const imgDir = './img';
+const imgPath = path.join(imgDir, 'og_image.png');
+
+if (!fs.existsSync(imgDir)) {
+    fs.mkdirSync(imgDir);
 }
 
+if (fs.existsSync(imgPath)) {
+    fs.unlinkSync(imgPath);
+}
 
 async function generateOGImage() {
+    let browser;
+    try {
+        browser = await puppeteer.launch();
+        const page = await browser.newPage();
 
+        const websiteUrl = 'https://abhiakl.xyz';
 
-    const browser = await puppeteer.launch();
-    const page = await browser.newPage();
-
-    const websiteUrl = 'https://abhiakl.xyz';
-
-    // Navigate to your website
-    await page.goto(websiteUrl, { waitUntil: 'domcontentloaded' });
-
-    // Set the viewport size to the desired image dimensions
-    await page.setViewport({ width: 1300, height: 730 });
-    
-    // Capture a screenshot of the rendered HTML
-    await page.screenshot({ path: './img/og_image.png' });
-
-    await browser.close();
+        await page.goto(websiteUrl, { waitUntil: 'domcontentloaded' });
+        await page.setViewport({ width: 1300, height: 730 });
+        await page.screenshot({ path: imgPath });
+    } catch (error) {
+        console.error('Error generating OG image:', error);
+    } finally {
+        if (browser) await browser.close();
+    }
 }
 
 generateOGImage();
