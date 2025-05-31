@@ -69,7 +69,7 @@ body, button {
     font-family: "iA Writer Mono", monospace;
 }
 h1, h2, h3 {
-    font-family: "OCRaStd";
+    font-family: "iA Writer Mono", monospace;
 }
 
 ::selection {
@@ -439,3 +439,29 @@ tr td br {
 }
 
 /* RGB Text Animation end */
+
+/* Blog Styles */
+.blog-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 2em 0;
+}
+.blog-list li {
+    margin-bottom: 1.5em;
+    padding-bottom: 1em;
+    border-bottom: 1px solid var(--gray);
+}
+.blog-title {
+    font-size: 1.1em;
+    font-weight: bold;
+    color: var(--pink);
+    text-decoration: none;
+}
+.blog-title:hover {
+    text-decoration: underline;
+}
+.blog-desc {
+    margin: 0.5em 0 0 0;
+    color: var(--gray);
+    font-size: 1em;
+}

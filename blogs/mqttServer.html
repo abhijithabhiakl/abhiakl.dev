@@ -2,63 +2,97 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MQTT Server with Mosquitto and Grafana</title>
-    <link rel="stylesheet" href="./style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+    <title>MQTT Server with Mosquitto on Raspberry Pi | Abhijith S</title>
+    <meta name="description" content="A guide to setting up an MQTT server with Mosquitto on Raspberry Pi, including dependencies and configuration.">
+    <link rel="stylesheet" href="../style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Ubuntu+Mono&display=swap" rel="stylesheet">
 </head>
 <body>
-
-<div class="container">
-    <!-- Header or Navbar (if applicable in your main site) -->
-    <header>
-        <h1>MQTT Server with Mosquitto and Grafana</h1>
-        <p class="date">Published: November 2024</p>
-    </header>
-    
-    <div class="content">
-        <!-- Intro section -->
-        <p class="intro">Here's how I set up an MQTT server for my IoT projects using Mosquitto and Grafana. This setup allows seamless data flow and real-time monitoring for connected devices.</p>
-        
-        <!-- Blog content sections -->
-        <section class="section">
-            <h2>Background</h2>
-            <p>In my IoT projects, I needed a way to collect and visualize data in real time. MQTT, a lightweight messaging protocol, is perfect for the task, and Mosquitto, an open-source MQTT broker, serves as the core server. Grafana is used to visualize this data beautifully.</p>
-        </section>
-
-        <section class="section">
-            <h2>Setup</h2>
-            <p>Here’s a step-by-step guide to setting up Mosquitto as an MQTT server:</p>
-            <ol>
-                <li>Install Mosquitto: `sudo apt update && sudo apt install mosquitto mosquitto-clients`</li>
-                <li>Configure Mosquitto for anonymous connections or with authentication, depending on your security needs.</li>
-                <li>Install Grafana and set it up to pull data from InfluxDB or other databases compatible with MQTT.</li>
-            </ol>
-        </section>
-
-        <section class="section">
-            <h2>Connecting IoT Devices</h2>
-            <p>Once Mosquitto is set up, connect your devices by configuring them to publish data to the Mosquitto broker's IP address. Ensure your devices are on the same network, or configure port forwarding if needed.</p>
-            <pre><code>// Sample MQTT connection code
-client.connect(broker, 1883, 60)  # Python paho-mqtt example
-client.publish("sensor/data", payload)</code></pre>
-        </section>
-
-        <section class="section">
-            <h2>Data Visualization with Grafana</h2>
-            <p>Grafana is an excellent tool for monitoring IoT data. Create a dashboard, add panels for each type of data, and connect to your InfluxDB to start visualizing data in real time.</p>
-        </section>
-
-        <section class="section">
-            <h2>Conclusion</h2>
-            <p>Setting up an MQTT server with Mosquitto and visualizing data in Grafana provides an efficient way to manage IoT projects. With this setup, you can scale your IoT applications with ease and monitor data effectively.</p>
-        </section>
+    <div class="container">
+        <header class="header-section">
+            <h1>MQTT Server with Mosquitto on Raspberry Pi</h1>
+            <p class="blog-meta"><em>Published: <time datetime="2024-06-10">June 10, 2024</time></em></p>
+        </header>
+        <main>
+            <article class="blog-content">
+                <h3>Introduction</h3>
+                <p>
+                    MQTT (Message Queuing Telemetry Transport) is a lightweight messaging protocol ideal for IoT and home automation projects. Setting up an MQTT server on a Raspberry Pi using Mosquitto is a great way to enable device communication on your local network.
+                </p>
+                <h3>Why Mosquitto?</h3>
+                <p>
+                    Mosquitto is a popular, open-source MQTT broker that's easy to install and configure, especially on resource-constrained devices like the Raspberry Pi.
+                </p>
+                <h3>Prerequisites</h3>
+                <ul>
+                    <li>Raspberry Pi running Raspberry Pi OS (or any Debian-based distro)</li>
+                    <li>Internet connection</li>
+                    <li>Basic command line knowledge</li>
+                </ul>
+                <h3>Installation Steps</h3>
+                <ol>
+                    <li>
+                        <strong>Update your system:</strong><br>
+                        <code>sudo apt update && sudo apt upgrade</code>
+                    </li>
+                    <li>
+                        <strong>Install Mosquitto and Mosquitto clients:</strong><br>
+                        <code>sudo apt install mosquitto mosquitto-clients</code>
+                    </li>
+                    <li>
+                        <strong>Enable Mosquitto to start on boot:</strong><br>
+                        <code>sudo systemctl enable mosquitto</code>
+                    </li>
+                    <li>
+                        <strong>Start the Mosquitto service:</strong><br>
+                        <code>sudo systemctl start mosquitto</code>
+                    </li>
+                </ol>
+                <h3>Testing Your MQTT Server</h3>
+                <ol>
+                    <li>
+                        <strong>Open two terminal windows.</strong>
+                    </li>
+                    <li>
+                        <strong>In the first window, subscribe to a topic:</strong><br>
+                        <code>mosquitto_sub -h localhost -t test/topic</code>
+                    </li>
+                    <li>
+                        <strong>In the second window, publish a message:</strong><br>
+                        <code>mosquitto_pub -h localhost -t test/topic -m "Hello MQTT!"</code>
+                    </li>
+                    <li>
+                        <strong>You should see the message appear in the first window.</strong>
+                    </li>
+                </ol>
+                <h3>Optional: Securing Your Broker</h3>
+                <ul>
+                    <li>Set up username/password authentication by editing <code>/etc/mosquitto/mosquitto.conf</code>.</li>
+                    <li>Enable SSL/TLS for encrypted communication.</li>
+                    <li>Restrict access to your local network for security.</li>
+                </ul>
+                <h3>Useful Dependencies & Tools</h3>
+                <ul>
+                    <li><strong>mosquitto-clients</strong> – Command-line tools for testing MQTT.</li>
+                    <li><strong>Node-RED</strong> – Visual programming for IoT, integrates with MQTT.</li>
+                    <li><strong>Grafana</strong> – For visualizing MQTT data (often used with InfluxDB).</li>
+                </ul>
+                <h3>Conclusion</h3>
+                <p>
+                    With Mosquitto running on your Raspberry Pi, you now have a reliable MQTT broker for your IoT projects. Experiment with publishing and subscribing to topics, and try integrating with other tools like Node-RED or Grafana for more advanced setups.
+                </p>
+                <p>
+                    <strong>Questions?</strong> Reach out to me via <a href="mailto:hi@abhiakl.xyz">email</a> or connect on my social links on the main page!
+                </p>
+            </article>
+        </main>
+        <a href="../index.html" class="go-home">← Back to Home</a>
+        <div class="dark-mode-toggler">
+            <input type="checkbox" id="toggler" />
+            <label for="toggler" aria-label="Toggler for Dark Mode"></label>
+        </div>
     </div>
-
-    <!-- Navigation Links -->
-    <footer>
-        <a href="/index.html">Back to Blog</a>
-    </footer>
-</div>
-
+    <script src="../script.js"></script>
 </body>
 </html>

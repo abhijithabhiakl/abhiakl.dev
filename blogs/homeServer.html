@@ -2,10 +2,83 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+    <title>Building a Home Server with an Old Ideapad & Debian | Abhijith S</title>
+    <meta name="description" content="How I turned my old Ideapad laptop into a home server using Debian Linux.">
+    <link rel="stylesheet" href="../style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Ubuntu+Mono&display=swap" rel="stylesheet">
 </head>
 <body>
-    <h1>TEST</h1>
+    <div class="container">
+        <header class="header-section">
+            <h1>Building a Home Server with an Old Ideapad & Debian</h1>
+            <p class="blog-meta"><em>Published: <time datetime="2024-06-10">June 10, 2024</time></em></p>
+        </header>
+        <main>
+            <article class="blog-content">
+                <h3>Introduction</h3>
+                <p>
+                    Ever wondered what to do with an old laptop? I decided to repurpose my aging Ideapad into a reliable home server using Debian Linux. This setup now handles file sharing, backups, media streaming, and more—all from hardware that would otherwise be collecting dust!
+                </p>
+                <h3>Why Use an Old Laptop?</h3>
+                <ul>
+                    <li>It’s cost-effective—no need to buy new hardware.</li>
+                    <li>Laptops have built-in battery backup (UPS).</li>
+                    <li>They’re compact and usually quiet.</li>
+                </ul>
+                <h3>Getting Started</h3>
+                <ol>
+                    <li>
+                        <strong>Backup your data:</strong> Save anything important from your old laptop before wiping it.
+                    </li>
+                    <li>
+                        <strong>Install Debian:</strong> Download the latest Debian ISO and create a bootable USB. Install Debian as you would on any PC.
+                    </li>
+                    <li>
+                        <strong>Update your system:</strong><br>
+                        <code>sudo apt update && sudo apt upgrade</code>
+                    </li>
+                </ol>
+                <h3>Essential Server Packages</h3>
+                <ul>
+                    <li><strong>OpenSSH Server</strong> (for remote access):<br>
+                        <code>sudo apt install openssh-server</code>
+                    </li>
+                    <li><strong>Samba</strong> (for file sharing):<br>
+                        <code>sudo apt install samba</code>
+                    </li>
+                    <li><strong>Plex/Emby/Jellyfin</strong> (for media streaming, optional)</li>
+                    <li><strong>rsync</strong> (for backups):<br>
+                        <code>sudo apt install rsync</code>
+                    </li>
+                </ul>
+                <h3>Network & Access</h3>
+                <ul>
+                    <li>Set a static IP for your server for easier access.</li>
+                    <li>Configure your router for port forwarding if you want remote access.</li>
+                    <li>Use SSH to manage your server from any device on your network.</li>
+                </ul>
+                <h3>Extras</h3>
+                <ul>
+                    <li>Set up <strong>Cloudflare DDNS</strong> for dynamic DNS if your IP changes.</li>
+                    <li>Install <strong>Docker</strong> to easily run additional services.</li>
+                    <li>Automate backups with <code>cron</code> jobs.</li>
+                </ul>
+                <h3>Conclusion</h3>
+                <p>
+                    Turning an old laptop into a home server is a rewarding project that gives new life to unused hardware. With Debian and a few essential packages, you can create a powerful, flexible server for your home or small office.
+                </p>
+                <p>
+                    <strong>Questions?</strong> Reach out to me via <a href="mailto:hi@abhiakl.xyz">email</a> or connect on my social links on the main page!
+                </p>
+            </article>
+        </main>
+        <a href="../index.html" class="go-home">← Back to Home</a>
+        <div class="dark-mode-toggler">
+            <input type="checkbox" id="toggler" />
+            <label for="toggler" aria-label="Toggler for Dark Mode"></label>
+        </div>
+    </div>
+    <script src="../script.js"></script>
 </body>
 </html>
