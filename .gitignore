@@ -60,3 +60,6 @@ node_modules
 # OS generated files
 .DS_Store
 Thumbs.db
+
+# Stylelint ignore file
+.stylelintignore
