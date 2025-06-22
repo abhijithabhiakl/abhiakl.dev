@@ -362,9 +362,11 @@ tr td br {
     padding: 0 0.55% 0.85%;
     opacity: 0.8;
 }
-.ico1 { color: rgb(78, 125, 255); }
-.ico2 { color: rgb(251, 41, 58); }
-.ico3 { color: rgb(137, 137, 137); }
+.ico1 { color: rgb(0, 0, 0); }    /* Twitter Blue */
+.ico2 { color: rgb(255, 11, 64); }     /* Elegant Red */
+.ico3 { color: rgb(108, 117, 125); }   /* Subtle Gray */
+.ico4 { color: rgb(255, 168, 5); }     /* Warm Amber (RSS) */
+
 .copyright {
     opacity: 0.5;
 }
