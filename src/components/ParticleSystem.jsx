@@ -33,8 +33,8 @@ const FLUID_VISCOSITY_FRICTION = 0.45; // Grittier, heavier feel (high friction)
 const PARTICLE_WIDTH = 0.45; // Replaces radius (2x previous radius of 0.16)
 const PARTICLE_LENGTH = 0.85;
 const PARTICLE_CORNER_RADIUS = 0.65; // New parameter for corner rounding
-const PARTICLE_COLOR = "#c0c0c0ff";
-const PARTICLE_EMISSIVE = "#727272";
+const PARTICLE_COLOR = "#828282";
+const PARTICLE_EMISSIVE = "#828282";
 const PARTICLE_EMISSIVE_INTENSITY = 0.8;
 
 // Water Balloon Deformity (Interaction area)

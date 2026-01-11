@@ -114,7 +114,6 @@ button {
     box-sizing: border-box;
     color: var(--gray);
     font-size: 1rem;
-    overflow: auto;
     transition: 0.4s ease all;
 }
 

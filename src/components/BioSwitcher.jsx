@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 
 const colors = ["#24d05a", "#e4094b", "#10a2f5", "#e9bc3f"];
 
@@ -21,11 +22,34 @@ export default function BioSwitcher({ activeTab, setActiveTab }) {
                     <button
                         key={tabId}
                         id={tabId}
-                        className={isActive ? 'show' : ''}
+                        role="tab"
                         aria-selected={isActive}
                         onClick={() => handleTabClick(tabId)}
-                        style={isActive ? { borderColor: activeColor, color: activeColor, fontWeight: 'bold' } : {}}
+                        style={{
+                            position: 'relative',
+                            padding: '5px 15px',
+                            background: 'transparent',
+                            border: 'none',
+                            color: isActive ? activeColor : 'inherit',
+                            fontWeight: isActive ? 'bold' : 'normal',
+                            cursor: 'pointer',
+                            outline: 'none',
+                            transition: 'color 0.3s'
+                        }}
                     >
+                        {isActive && (
+                            <motion.div
+                                layoutId="active-pill"
+                                style={{
+                                    position: 'absolute',
+                                    inset: 0,
+                                    borderRadius: '15px',
+                                    border: `2px solid ${activeColor}`,
+                                    zIndex: -1
+                                }}
+                                transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                            />
+                        )}
                         {tab}
                     </button>
                 );
