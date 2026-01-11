@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { Canvas } from '@react-three/fiber';
+import ParticleSystem from './components/ParticleSystem';
 import Header from './components/Header';
 import Nav from './components/Nav';
 import BioSwitcher from './components/BioSwitcher';
@@ -55,6 +57,26 @@ function App() {
 
   return (
     <>
+      <div style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        width: '100vw',
+        height: '100vh',
+        zIndex: -1
+      }}>
+        <Canvas
+          camera={{ position: [0, 0, 40], fov: 60 }}
+          dpr={[1, 2]}
+          eventSource={document.body}
+          eventPrefix="client"
+        >
+          <color attach="background" args={[darkMode ? '#252525' : '#efefef']} />
+          <ambientLight intensity={0.5} />
+          <pointLight position={[10, 10, 10]} intensity={1.5} />
+          <ParticleSystem />
+        </Canvas>
+      </div>
       <div className="container">
         <Header />
         <Nav />
