@@ -48,7 +48,7 @@ export default function BioContent({ activeTab, darkMode }) {
                 <h2 id="blog">Recent Blog Posts</h2>
                 <ul className="blog-list">
                     <li>
-                        <a href="https://blog.abhidev.in" className="blog-title">I ported my blog to <a href="https://blog.abhijithakl.xyz">this</a> cassidy template</a>
+                        <a href="https://blog.abhidev.in" className="blog-title">I ported my blog to <a href="https://blog.abhidev.in">this</a> cassidy template</a>
                         <p className="blog-desc">This blog section is a complete mess and hard to blog since i manually need to edit the html code
                             , so i'm moving to a more structured blog, i saw this astro template from cassidy and decided to implement my blog on it</p>
                     </li>
@@ -78,4 +78,5 @@ export default function BioContent({ activeTab, darkMode }) {
         </main>
     );
 }
+
 
