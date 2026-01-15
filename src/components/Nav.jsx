@@ -6,7 +6,8 @@ export default function Nav() {
             <a href="https://github.com/abhijithabhiakl" target="_blank" rel="noopener noreferrer">github</a>
             <a href="https://twitter.com/abhijithabhiakl" target="_blank" rel="noopener noreferrer">twitter</a>
             <a href="mailto:abhijithabhiakl@gmail.com">gmail</a>
-            <a href="https://blog.abhijithakl.xyz/posts/" rel="noopener noreferrer">blog section</a>
+            <a href="https://blog.abhidev.in/posts/" rel="noopener noreferrer">blog section</a>
         </nav>
     );
 }
+
