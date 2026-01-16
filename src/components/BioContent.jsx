@@ -41,6 +41,8 @@ export default function BioContent({ activeTab, darkMode }) {
                 <a href="https://github.com/abhijithabhiakl/" target="_blank" rel="noopener noreferrer">A variety of Mechanical keyboards</a>,<br />
                 <a href="https://github.com/abhijithabhiakl/" target="_blank" rel="noopener noreferrer">Face based attendance management system</a>,<br />
                 <a href="https://github.com/abhijithabhiakl/Redragon_K617-QMK_port" target="_blank" rel="noopener noreferrer">Redragon K617 firmware port (to qmk)</a> <br />
+                <a href="https://github.com/abhijithabhiakl/agriMon_v2" target="_blank" rel="noopener noreferrer">Agriculture monitoring system</a> <br />
+                <a href="https://github.com/abhijithabhiakl/healthmoniteringsm" target="_blank" rel="noopener noreferrer">Health monitoring system</a> <br />
                 <p>There are more projects than I mentioned here which I lost count after the above & too lazy to document all of it. (EO 2024-12-14)</p>
             </section>
 
