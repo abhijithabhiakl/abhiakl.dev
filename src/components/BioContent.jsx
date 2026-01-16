@@ -34,15 +34,15 @@ export default function BioContent({ activeTab, darkMode }) {
             <section className={`bio projects ${activeTab === 'projects' ? 'show' : ''}`} aria-labelledby="projects" hidden={activeTab !== 'projects'}>
                 <p>Some of my significant projects I've worked on over the years.</p>
                 <a id="rgb_text" href="https://codepen.io/avsrriyr-the-vuer/pen/VwoRrgJ" target="_blank" rel="noopener noreferrer">This rgb gradient flow on code pen</a>,<br />
+                <a href="https://github.com/abhijithabhiakl/Redragon_K617-QMK_port" target="_blank" rel="noopener noreferrer">Redragon K617 firmware port (to qmk)</a> <br />
+                <a href="https://github.com/abhijithabhiakl/macropad" target="_blank" rel="noopener noreferrer">A macropad</a>,<br />
+                <a href="https://github.com/abhijithabhiakl/agriMon_v2" target="_blank" rel="noopener noreferrer">Agriculture monitoring system</a> <br />
+                <a href="https://github.com/abhijithabhiakl/healthmoniteringsm" target="_blank" rel="noopener noreferrer">Health monitoring system</a> <br />
+                <a href="https://github.com/abhijithabhiakl/" target="_blank" rel="noopener noreferrer">Face based attendance management system</a>,<br />
                 <a href="https://github.com/abhijithabhiakl/" target="_blank" rel="noopener noreferrer">Auto water pumping system</a>,<br />
                 <a href="https://github.com/abhijithabhiakl/" target="_blank" rel="noopener noreferrer">SPWM inverter</a>,<br />
                 <a href="https://github.com/abhijithabhiakl/" target="_blank" rel="noopener noreferrer">CNC plotter</a>,<br />
                 <a href="https://github.com/abhijithabhiakl/cloudstatus" target="_blank" rel="noopener noreferrer">Weather app (flutter)</a>,<br />
-                <a href="https://github.com/abhijithabhiakl/" target="_blank" rel="noopener noreferrer">A variety of Mechanical keyboards</a>,<br />
-                <a href="https://github.com/abhijithabhiakl/" target="_blank" rel="noopener noreferrer">Face based attendance management system</a>,<br />
-                <a href="https://github.com/abhijithabhiakl/Redragon_K617-QMK_port" target="_blank" rel="noopener noreferrer">Redragon K617 firmware port (to qmk)</a> <br />
-                <a href="https://github.com/abhijithabhiakl/agriMon_v2" target="_blank" rel="noopener noreferrer">Agriculture monitoring system</a> <br />
-                <a href="https://github.com/abhijithabhiakl/healthmoniteringsm" target="_blank" rel="noopener noreferrer">Health monitoring system</a> <br />
                 <p>There are more projects than I mentioned here which I lost count after the above & too lazy to document all of it. (EO 2024-12-14)</p>
             </section>
 
