@@ -1,84 +1,149 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
-    <title>Building a Home Server with an Old Ideapad & Debian | Abhijith S</title>
-    <meta name="description" content="How I turned my old Ideapad laptop into a home server using Debian Linux.">
+    <title>Building a Home Server with Raspberry Pi 3B | Abhijith S</title>
+    <meta name="description"
+        content="Moving from an old laptop to a Raspberry Pi 3B for a silent, efficient home server with Docker and Pi-hole.">
     <link rel="stylesheet" href="../style.css" />
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Ubuntu+Mono&display=swap" rel="stylesheet">
+    <!-- Highlight.js -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/srcery.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
 </head>
+
 <body>
     <div class="container">
         <header class="header-section">
-            <h1>Building a Home Server with an Old Ideapad & Debian</h1>
-            <p class="blog-meta"><em>Published: <time datetime="2024-06-10">June 10, 2024</time></em></p>
+            <h1>Building a Home Server with Raspberry Pi 3B</h1>
+            <p class="blog-meta"><em>Published: <time datetime="2024-06-10">June 10, 2024</time> (Updated: 2026)</em>
+            </p>
         </header>
+
         <main>
-            <article class="blog-content">
-                <h3>Introduction</h3>
+            <div class="blog-content">
+                <h3>The Pivot: Why I Switched</h3>
                 <p>
-                    Ever wondered what to do with an old laptop? I decided to repurpose my aging Ideapad into a reliable home server using Debian Linux. This setup now handles file sharing, backups, media streaming, and more—all from hardware that would otherwise be collecting dust!
-                </p>
-                <h3>Why Use an Old Laptop?</h3>
-                <ul>
-                    <li>It’s cost-effective—no need to buy new hardware.</li>
-                    <li>Laptops have built-in battery backup (UPS).</li>
-                    <li>They’re compact and usually quiet.</li>
-                </ul>
-                <h3>Getting Started</h3>
-                <ol>
-                    <li>
-                        <strong>Backup your data:</strong> Save anything important from your old laptop before wiping it.
-                    </li>
-                    <li>
-                        <strong>Install Debian:</strong> Download the latest Debian ISO and create a bootable USB. Install Debian as you would on any PC.
-                    </li>
-                    <li>
-                        <strong>Update your system:</strong><br>
-                        <code>sudo apt update && sudo apt upgrade</code>
-                    </li>
-                </ol>
-                <h3>Essential Server Packages</h3>
-                <ul>
-                    <li><strong>OpenSSH Server</strong> (for remote access):<br>
-                        <code>sudo apt install openssh-server</code>
-                    </li>
-                    <li><strong>Samba</strong> (for file sharing):<br>
-                        <code>sudo apt install samba</code>
-                    </li>
-                    <li><strong>Plex/Emby/Jellyfin</strong> (for media streaming, optional)</li>
-                    <li><strong>rsync</strong> (for backups):<br>
-                        <code>sudo apt install rsync</code>
-                    </li>
-                </ul>
-                <h3>Network & Access</h3>
-                <ul>
-                    <li>Set a static IP for your server for easier access.</li>
-                    <li>Configure your router for port forwarding if you want remote access.</li>
-                    <li>Use SSH to manage your server from any device on your network.</li>
-                </ul>
-                <h3>Extras</h3>
-                <ul>
-                    <li>Set up <strong>Cloudflare DDNS</strong> for dynamic DNS if your IP changes.</li>
-                    <li>Install <strong>Docker</strong> to easily run additional services.</li>
-                    <li>Automate backups with <code>cron</code> jobs.</li>
-                </ul>
-                <h3>Conclusion</h3>
-                <p>
-                    Turning an old laptop into a home server is a rewarding project that gives new life to unused hardware. With Debian and a few essential packages, you can create a powerful, flexible server for your home or small office.
+                    I started my home lab journey repurposing an old Ideapad laptop. It was free and had a built-in
+                    battery (UPS). However, it had downsides: it was bulky, ran hot, and the fan noise was noticeable at
+                    night.
                 </p>
                 <p>
-                    <strong>Questions?</strong> Reach out to me via <a href="mailto:hi@abhiakl.xyz">email</a> or connect on my social links on the main page!
-                </p>
-            </article>
+                    I decided to migrate to a <strong>Raspberry Pi 3B</strong>. It's completely silent, fits in the palm
+                    of my hand, and sips power (< 4W at idle). It’s the perfect "set and forget" device for a 24/7 home
+                        server. </p>
+
+                        <h3>The Hardware</h3>
+                        <p>You don't need much to get started. Here is my minimalist setup:</p>
+                        <ul>
+                            <li><strong>Raspberry Pi 3B:</strong> Affordable and powerful enough for lightweight
+                                containers.</li>
+                            <li><strong>16GB SanDisk Ultra MicroSD:</strong> For the OS and containers.</li>
+                            <li><strong>5V 2.5A Power Supply:</strong> Stability is key; under-voltage causes weird
+                                crashes.</li>
+                            <li><strong>Ethernet Cable:</strong> Wi-Fi is fine, but wires are forever.</li>
+                        </ul>
+
+                        <h3>The Setup: Headless & Clean</h3>
+                        <p>
+                            I used the <strong>Raspberry Pi Imager</strong> to flash <em>Raspberry Pi OS Lite
+                                (64-bit)</em>.
+                            The "Lite" version has no desktop environment, saving precious RAM for our services.
+                        </p>
+                        <p>
+                            <strong>Pro Tip:</strong> Click the "Settings" gear icon in the Imager to:
+                        </p>
+                        <ul>
+                            <li>Enable SSH (Authentication with public key).</li>
+                            <li>Set the hostname (e.g., <code>pi-server</code>).</li>
+                            <li>Configure Wi-Fi (as a backup to Ethernet).</li>
+                        </ul>
+
+                        <h3>The Stack: Docker is King</h3>
+                        <p>
+                            Gone are the days of installing services directly on the OS. I use <strong>Docker</strong>
+                            to keep everything isolated and clean. If a service breaks, I just kill the container, not
+                            the server.
+                        </p>
+                        <p>Installing Docker on a Pi is a one-liner:</p>
+                        <pre><code class="language-bash">curl -sSL https://get.docker.com | sh
+sudo usermod -aG docker $USER</code></pre>
+
+                        <h3>Service 1: Pi-hole (Network Ad-Blocker)</h3>
+                        <p>
+                            The first thing running on my Pi is <strong>Pi-hole</strong>. It acts as a DNS sinkhole,
+                            blocking ads and trackers for <em>every device</em> on my Wi-Fi (phones, tablets, smart TV).
+                        </p>
+                        <p>I run it via Docker Compose:</p>
+                        <pre><code class="language-yaml">version: "3"
+services:
+  pihole:
+    container_name: pihole
+    image: pihole/pihole:latest
+    ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+      - "80:80/tcp"
+    environment:
+      TZ: 'Asia/Kolkata'
+    volumes:
+      - './etc-pihole/:/etc/pihole/'
+      - './etc-dnsmasq.d/:/etc/dnsmasq.d/'
+    restart: unless-stopped</code></pre>
+
+                        <h3>Service 2: Samba (Simple NAS)</h3>
+                        <p>
+                            I attached a 1TB external HDD to store backups and media. <strong>Samba</strong> makes this
+                            drive accessible to my Windows PC and Mac over the network.
+                        </p>
+                        <pre><code class="language-bash">sudo apt install samba samba-common-bin
+# Edit /etc/samba/smb.conf to add your drive sharing settings</code></pre>
+
+                        <h3>Service 3: Cloudflare DDNS (Dynamic IP)</h3>
+                        <p>
+                            Since my ISP assigns a dynamic IP address, accessing my server remotely can be tricky if the
+                            IP changes. I use <strong>Cloudflare</strong> as my DNS provider and a custom script to
+                            automatically update my domain's A-record whenever my home IP changes.
+                        </p>
+                        <p>
+                            I wrote a custom script for this which is available on my GitHub. It fetches my public IP
+                            and uses the Cloudflare API to update the record.
+                        </p>
+                        <div class="code-block-header">Setup</div>
+                        <pre><code class="language-bash"># Clone the script
+git clone https://github.com/abhijithabhiakl/cloudflare-ddns-script
+cd cloudflare-ddns-script
+chmod +x update_ip.sh
+
+# Add to crontab to run every 5 minutes
+crontab -e
+# Add line: */5 * * * * /home/pi/cloudflare-ddns-script/update_ip.sh</code></pre>
+
+                        <h3>Conclusion</h3>
+                        <p>
+                            Migrating to the Raspberry Pi 3B was the best decision for my home lab. It's silent,
+                            efficient, and running Docker makes managing services a breeze. Checkout my other blogs to
+                            see more about my home lab.
+                        </p>
+                        <p>
+                            <strong>Questions?</strong> <a href="mailto:hi@abhiakl.xyz">Email me</a> or check the <a
+                                href="https://github.com/abhiakl">GitHub repo</a> for my compose files.
+                        </p>
+            </div>
         </main>
+
         <a href="../index.html" class="go-home">← Back to Home</a>
+
         <div class="dark-mode-toggler">
             <input type="checkbox" id="toggler" />
             <label for="toggler" aria-label="Toggler for Dark Mode"></label>
         </div>
     </div>
+
     <script src="../script.js"></script>
 </body>
+
 </html>

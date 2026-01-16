@@ -1,13 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
     <title>Basics of Embedded Systems | Abhijith S</title>
-    <meta name="description" content="An introduction to embedded systems, perfect for beginners in hardware development.">
+    <meta name="description"
+        content="An introduction to embedded systems, perfect for beginners in hardware development.">
     <link rel="stylesheet" href="../style.css" />
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Ubuntu+Mono&display=swap" rel="stylesheet">
+    <!-- Highlight.js for code syntax highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/srcery.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
 </head>
+
 <body>
     <div class="container">
         <header class="header-section">
@@ -18,33 +25,352 @@
             <article class="blog-content">
                 <h3>Introduction</h3>
                 <p>
-                    Embedded systems are specialized computing systems that perform dedicated functions within larger mechanical or electrical systems. Unlike general-purpose computers, embedded systems are designed for specific tasks, often with real-time computing constraints.
+                    Embedded systems are specialized computing systems that perform dedicated functions within larger
+                    mechanical or electrical systems. Unlike general-purpose computers that can run any software,
+                    embedded systems are designed for specific tasks with real-time computing constraints. They're
+                    everywhere—from the microwave in your kitchen to the engine control unit in your car.
                 </p>
+                <p>
+                    This guide will take you from the basics to hands-on programming with real examples using AVR
+                    microcontrollers. By the end, you'll understand not just <em>what</em> embedded systems are, but
+                    <em>how</em> to build them.
+                </p>
+
                 <h3>What is an Embedded System?</h3>
                 <p>
-                    An embedded system is a combination of hardware and software designed to perform a particular function. Examples include washing machines, microwave ovens, smart thermostats, and even modern cars.
+                    An embedded system is a combination of hardware and software designed to perform a particular
+                    function. The key characteristics are:
                 </p>
-                <h3>Key Components</h3>
                 <ul>
-                    <li><strong>Microcontroller/Microprocessor:</strong> The brain of the system, executing instructions.</li>
-                    <li><strong>Memory:</strong> Stores code and data (RAM, ROM, Flash).</li>
-                    <li><strong>Input/Output Interfaces:</strong> Sensors, buttons, displays, communication ports, etc.</li>
-                    <li><strong>Software (Firmware):</strong> The program that controls the hardware.</li>
+                    <li><strong>Dedicated Function:</strong> Unlike a PC, it does one thing very well</li>
+                    <li><strong>Real-time Operation:</strong> Must respond to inputs within strict time constraints</li>
+                    <li><strong>Resource Constrained:</strong> Limited memory, processing power, and energy</li>
+                    <li><strong>Reliability:</strong> Often must operate for years without failure</li>
                 </ul>
-                <h3>Applications</h3>
-                <ul>
-                    <li>Consumer electronics (TVs, cameras, smartwatches)</li>
-                    <li>Automotive systems (engine control, ABS, infotainment)</li>
-                    <li>Industrial automation (PLCs, robotics)</li>
-                    <li>Medical devices (heart monitors, infusion pumps)</li>
-                    <li>IoT devices (smart home, wearables)</li>
-                </ul>
-                <h3>Why Learn Embedded Systems?</h3>
+
+                <h3>Understanding Microcontrollers</h3>
                 <p>
-                    Understanding embedded systems opens up opportunities in hardware development, IoT, robotics, and more. It’s a foundational skill for anyone interested in how modern devices work under the hood.
+                    At the heart of most embedded systems is a <strong>microcontroller (MCU)</strong>—a complete
+                    computer on a single chip. Unlike microprocessors (like those in your laptop), microcontrollers
+                    integrate:
+                </p>
+                <ul>
+                    <li><strong>CPU:</strong> The processing unit that executes instructions</li>
+                    <li><strong>Memory:</strong> Flash (program storage), SRAM (data), and EEPROM (persistent data)</li>
+                    <li><strong>Peripherals:</strong> GPIO pins, timers, ADC, USART, I2C, SPI, etc.</li>
+                    <li><strong>Clock:</strong> Timing circuitry (typically 1-20 MHz for simple MCUs)</li>
+                </ul>
+                <p>
+                    For this guide, I'll use the <strong>ATmega328P</strong> (the chip on Arduino Uno) as our example.
+                    It has 32KB Flash, 2KB SRAM, and runs at 16 MHz.
+                </p>
+
+                <h3>Your First Program: LED Blink</h3>
+                <p>
+                    The "Hello World" of embedded systems is blinking an LED. Here's a complete example:
+                </p>
+                <pre><code class="language-c">#include &lt;avr/io.h&gt;        // Hardware register definitions
+#include &lt;util/delay.h&gt;    // Delay functions
+
+int main(void) {
+    // Set PD5 (pin 13 on Arduino) as output
+    DDRD = 0b11111111;     // Data Direction Register D: all outputs
+    
+    while (1) {            // Infinite loop
+        PORTD |= (1 &lt;&lt; DDD5);   // Turn LED ON (set bit 5)
+        _delay_ms(500);         // Wait 500ms
+        PORTD &= ~(1 &lt;&lt; DDD5);  // Turn LED OFF (clear bit 5)
+        _delay_ms(500);         // Wait 500ms
+    }
+}</code></pre>
+
+                <h4>Understanding the Code</h4>
+                <p><strong>Registers:</strong> Microcontrollers are programmed by writing to hardware registers. Key
+                    registers for GPIO:</p>
+                <ul>
+                    <li><code>DDRx</code> (Data Direction Register): Configures pins as input (0) or output (1)</li>
+                    <li><code>PORTx</code>: Sets output value (HIGH/LOW) or enables pull-up resistors for inputs</li>
+                    <li><code>PINx</code>: Reads the current state of input pins</li>
+                </ul>
+                <p><strong>Bit Manipulation:</strong> We use bitwise operations to control individual pins:</p>
+                <ul>
+                    <li><code>(1 &lt;&lt; DDD5)</code> creates a bitmask with only bit 5 set</li>
+                    <li><code>|=</code> sets a bit to 1 (OR operation)</li>
+                    <li><code>&= ~</code> clears a bit to 0 (AND with inverted mask)</li>
+                </ul>
+
+                <h3>More Advanced: Cyclone LED Effect</h3>
+                <p>
+                    Let's create a "Knight Rider" style LED effect that sweeps back and forth:
+                </p>
+                <pre><code class="language-c">#include &lt;avr/io.h&gt;
+#include &lt;util/delay.h&gt;
+
+#define DELAYTIME 200
+
+int main(void) {
+    uint8_t i;
+    DDRD = 0xff;           // All PORTD pins as output
+    
+    while (1) {
+        // Sweep forward
+        for (i = 0; i &lt; 8; i++) {
+            PORTD = (1 &lt;&lt; i);     // Light only i'th LED
+            _delay_ms(DELAYTIME);
+        }
+        // Sweep backward
+        for (i = 7; i &gt; 0; i--) {
+            PORTD = (1 &lt;&lt; i);
+            _delay_ms(DELAYTIME);
+        }
+    }
+}</code></pre>
+
+                <h3>Serial Communication (USART)</h3>
+                <p>
+                    Real embedded systems need to communicate. The <strong>USART</strong> (Universal
+                    Synchronous/Asynchronous Receiver/Transmitter) enables serial communication with computers, sensors,
+                    or other devices.
+                </p>
+
+                <h4>USART Basics</h4>
+                <p>
+                    Serial communication sends data one bit at a time over a wire. Key parameters:
+                </p>
+                <ul>
+                    <li><strong>Baud Rate:</strong> Bits per second (common: 9600, 115200)</li>
+                    <li><strong>Data Bits:</strong> Usually 8 bits per character</li>
+                    <li><strong>Parity:</strong> Error checking (usually none)</li>
+                    <li><strong>Stop Bits:</strong> End-of-character marker (usually 1)</li>
+                </ul>
+
+                <h4>Serial Loopback Example</h4>
+                <p>
+                    This program receives characters over serial and echoes them back, displaying the binary
+                    representation:
+                </p>
+                <pre><code class="language-c">#include &lt;avr/io.h&gt;
+#include "USART.h"
+
+void printByteBinary(uint8_t byte) {
+    for (int8_t i = 7; i &gt;= 0; i--) {
+        if (byte & (1 &lt;&lt; i)) {
+            transmitByte('1');
+        } else {
+            transmitByte('0');
+        }
+    }
+}
+
+int main(void) {
+    char serialCharacter;
+    
+    // GPIO Setup
+    DDRD = 0b11111100;     // PD2-PD7 as outputs (LEDs)
+    DDRB = 0b00000011;     // PB0-PB1 as outputs
+    
+    // Initialize USART
+    initUSART();
+    printString("Hello World!\r\n");
+    
+    while (1) {
+        serialCharacter = receiveByte();     // Wait for input
+        
+        printString("char: ");
+        transmitByte(serialCharacter);
+        
+        printString("  binary: ");
+        printByteBinary(serialCharacter);
+        printString("\r\n");
+        
+        // Display on LEDs
+        PORTD = (PORTD & 0x03) | (serialCharacter & 0xFC);
+        PORTB = (PORTB & 0xFC) | (serialCharacter & 0x03);
+    }
+}</code></pre>
+
+                <h3>Professional Project Structure</h3>
+                <p>
+                    As projects grow, dumping everything into one folder becomes unmanageable. I recommend a structured
+                    approach found in professional environments. Here is the structure I use for my AVR projects:
+                </p>
+                <pre><code class="language-bash">avr/
+├── toolchain/
+│   └── Makefile.common   # Shared configuration (MCU, F_CPU, Programmer)
+│
+├── projects/
+│   ├── blink/            # Individual Project
+│   │   ├── src/          # Source files (.c)
+│   │   └── makefile      # Project-specific build rules
+│   └── ...
+│
+└── build/                # Global build directory (keeps source clean)</code></pre>
+
+                <h3>The Magic of Makefiles</h3>
+                <p>
+                    Typing long <code>avr-gcc</code> commands manually is error-prone and tedious. A
+                    <strong>Makefile</strong> automates this. It abstracts complex compilation flags and dependency
+                    tracking into simple commands.
                 </p>
                 <p>
-                    <strong>Want to know more?</strong> Reach out to me via <a href="mailto:hi@abhiakl.xyz">email</a> or connect on my social links on the main page!
+                    Here is the actual <strong>Makefile</strong> from my <code>blink</code> project. It leverages a
+                    shared configuration to keep things clean:
+                </p>
+                <pre><code class="language-makefile"># =================================================
+# Repository root (relative to projects/<name>/)
+# =================================================
+REPO_ROOT := ../..
+
+include $(REPO_ROOT)/toolchain/Makefile.common
+
+# =================================================
+# Project identity
+# =================================================
+TARGET := blink
+SRC    := src/main.c
+
+# =================================================
+# Global build dir (ONE build/ at repo root)
+# =================================================
+BUILD := $(ROOT_BUILD)/$(TARGET)
+
+ELF := $(BUILD)/$(TARGET).elf
+HEX := $(BUILD)/$(TARGET).hex
+
+# ... (Standard Phony Targets) ...
+
+# =================================================
+# Default
+# =================================================
+all: $(HEX)
+
+# =================================================
+# Flash / verify
+# =================================================
+flash: $(HEX)
+	@$(AVRDUDE) -c $(PROG) -p $(PART) -U flash:w:$<:i $(AVRDUDE_OPTS)
+
+# =================================================
+# Cleanup (PROJECT ONLY)
+# =================================================
+clean:
+	@rm -rf $(BUILD)
+
+# =================================================
+# Composite workflows
+# =================================================
+upload: all size device fuse flash verify
+	@echo "==> Build and upload completed"
+
+qupload: all flash verify
+	@echo "==> Quick upload completed"</code></pre>
+
+                <h3>My Development Workflow</h3>
+                <p>
+                    With this setup, the "Edit → Compile → Flash" loop becomes seamless:
+                </p>
+                <ol>
+                    <li><strong><code>make</code></strong>: Compiles the source in <code>src/</code> and generates
+                        artifacts in <code>build/</code>.</li>
+                    <li><strong><code>make flash</code></strong>: Writes the confirmed <code>.hex</code> file to the
+                        microcontroller.</li>
+                    <li><strong><code>make qupload</code></strong>: A custom target for rapid iteration (Build + Flash +
+                        Verify).</li>
+                    <li><strong><code>make clean</code></strong>: Wipes the <code>build/</code> directory to ensure a
+                        fresh start.</li>
+                </ol>
+
+                <h3>Key Concepts to Master</h3>
+
+                <h4>1. Memory Architecture</h4>
+                <ul>
+                    <li><strong>Flash:</strong> Non-volatile, stores your program (32KB on ATmega328P)</li>
+                    <li><strong>SRAM:</strong> Volatile, stores variables during runtime (2KB)</li>
+                    <li><strong>EEPROM:</strong> Non-volatile, stores data that persists across resets (1KB)</li>
+                </ul>
+
+                <h4>2. Interrupts</h4>
+                <p>
+                    Instead of constantly checking (polling), interrupts let hardware "interrupt" your program when
+                    something happens (button press, timer overflow, serial data received).
+                </p>
+
+                <h4>3. Timers and PWM</h4>
+                <p>
+                    Hardware timers count clock cycles and can trigger interrupts or generate PWM signals for motor
+                    control, LED dimming, etc.
+                </p>
+
+                <h4>4. Communication Protocols</h4>
+                <ul>
+                    <li><strong>USART:</strong> Serial communication (2 wires: TX, RX)</li>
+                    <li><strong>I2C:</strong> Multi-device bus (2 wires: SDA, SCL)</li>
+                    <li><strong>SPI:</strong> High-speed serial (4 wires: MOSI, MISO, SCK, SS)</li>
+                </ul>
+
+                <h3>Getting Started with Your Own Projects</h3>
+
+                <h4>Hardware You'll Need</h4>
+                <ul>
+                    <li>Arduino Uno or bare ATmega328P chip</li>
+                    <li>USB cable for programming</li>
+                    <li>Breadboard and jumper wires</li>
+                    <li>LEDs, resistors, buttons</li>
+                    <li>Optional: sensors (temperature, light, motion)</li>
+                </ul>
+
+                <h4>Software Setup</h4>
+                <ol>
+                    <li>Install <code>avr-gcc</code> (compiler)</li>
+                    <li>Install <code>avrdude</code> (programmer)</li>
+                    <li>Install <code>make</code> (build automation)</li>
+                    <li>Optional: <code>minicom</code> or <code>screen</code> for serial monitoring</li>
+                </ol>
+
+                <h4>Project Ideas for Learning</h4>
+                <ol>
+                    <li><strong>LED Blink:</strong> Basic GPIO output</li>
+                    <li><strong>Button Input:</strong> Read GPIO inputs with debouncing</li>
+                    <li><strong>Serial Echo:</strong> USART communication basics</li>
+                    <li><strong>PWM LED Dimmer:</strong> Analog output using timers</li>
+                    <li><strong>Temperature Monitor:</strong> ADC and sensor reading</li>
+                    <li><strong>I2C Scanner:</strong> Detect devices on I2C bus</li>
+                    <li><strong>Real-time Clock:</strong> Timer interrupts for timekeeping</li>
+                </ol>
+
+                <h3>Common Pitfalls and Tips</h3>
+                <ul>
+                    <li><strong>Forgot to set DDR:</strong> Always configure pin direction before use</li>
+                    <li><strong>Wrong baud rate:</strong> Transmitter and receiver must match exactly</li>
+                    <li><strong>Floating inputs:</strong> Use pull-up/pull-down resistors for buttons</li>
+                    <li><strong>Blocking delays:</strong> <code>_delay_ms()</code> freezes your program—use timers for
+                        multitasking</li>
+                    <li><strong>Power issues:</strong> Ensure stable 5V supply and proper grounding</li>
+                </ul>
+
+                <h3>Resources for Further Learning</h3>
+                <ul>
+                    <li><strong>Datasheets:</strong> ATmega328P datasheet is your bible—learn to read it</li>
+                    <li><strong>AVR Libc Manual:</strong> Documentation for all AVR C library functions</li>
+                    <li><strong>Make: AVR Programming</strong> by Elliot Williams (excellent book)</li>
+                    <li><strong>Practice:</strong> Build projects, break things, learn from mistakes</li>
+                </ul>
+
+                <h3>Conclusion</h3>
+                <p>
+                    Embedded systems programming is both challenging and rewarding. You're working at the intersection
+                    of hardware and software, where every byte of memory and every clock cycle matters. Start with
+                    simple projects like LED blink, gradually add complexity (buttons, serial communication, sensors),
+                    and before you know it, you'll be building sophisticated IoT devices and robots.
+                </p>
+                <p>
+                    The key is to <strong>get your hands dirty</strong>—read datasheets, write code, flash it to
+                    hardware, debug when it doesn't work, and celebrate when it does. That's how you truly learn
+                    embedded systems.
+                </p>
+                <p>
+                    <strong>Want to discuss embedded systems or need help with a project?</strong> Reach out to me via
+                    <a href="mailto:hi@abhiakl.xyz">email</a> or connect on my social links on the main page!
                 </p>
             </article>
         </main>
@@ -56,4 +382,5 @@
     </div>
     <script src="../script.js"></script>
 </body>
+
 </html>

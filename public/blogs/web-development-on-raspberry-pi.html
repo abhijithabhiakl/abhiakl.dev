@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
@@ -7,7 +8,12 @@
     <meta name="description" content="A guide to setting up web development on a Raspberry Pi.">
     <link rel="stylesheet" href="../style.css" />
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Ubuntu+Mono&display=swap" rel="stylesheet">
+    <!-- Highlight.js -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/srcery.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
 </head>
+
 <body>
     <div class="container">
         <header class="header-section">
@@ -16,10 +22,13 @@
         </header>
         <main>
             <article class="blog-content">
-                <img src="../assets/raspberry-pi-webdev.jpg" alt="Raspberry Pi with code on screen" style="max-width:100%;border-radius:12px;margin-bottom:1em;">
+                <img src="../assets/raspberry-pi-webdev.jpg" alt="Raspberry Pi with code on screen"
+                    style="max-width:100%;border-radius:12px;margin-bottom:1em;">
                 <h3>Introduction</h3>
                 <p>
-                    The Raspberry Pi is a powerful, affordable single-board computer that’s perfect for learning web development. In this post, I’ll walk you through setting up your Pi as a web development environment.
+                    The Raspberry Pi is a powerful, affordable single-board computer that’s perfect for learning web
+                    development. In this post, I’ll walk you through setting up your Pi as a web development
+                    environment.
                 </p>
                 <h3>Why Use a Raspberry Pi?</h3>
                 <ul>
@@ -30,7 +39,9 @@
                 <h3>Setting Up Your Environment</h3>
                 <ol>
                     <li>Install Raspberry Pi OS on your SD card.</li>
-                    <li>Update your system: <code>sudo apt update && sudo apt upgrade</code></li>
+                    <li>Update your system:
+                        <pre><code class="language-bash">sudo apt update && sudo apt upgrade</code></pre>
+                    </li>
                     <li>Install a web server (e.g., Apache or Nginx).</li>
                     <li>Set up your preferred programming language (Python, Node.js, PHP, etc.).</li>
                     <li>Start coding and access your site via <code>http://localhost</code>!</li>
@@ -43,10 +54,12 @@
                 </ul>
                 <h3>Conclusion</h3>
                 <p>
-                    Web development on a Raspberry Pi is a fun and educational experience. Whether you’re building a personal project or learning new skills, the Pi is a great platform to get started.
+                    Web development on a Raspberry Pi is a fun and educational experience. Whether you’re building a
+                    personal project or learning new skills, the Pi is a great platform to get started.
                 </p>
                 <p>
-                    <strong>Questions?</strong> Reach out to me via <a href="mailto:hi@abhiakl.xyz">email</a> or connect on my social links on the main page!
+                    <strong>Questions?</strong> Reach out to me via <a href="mailto:hi@abhiakl.xyz">email</a> or connect
+                    on my social links on the main page!
                 </p>
             </article>
         </main>
@@ -58,4 +71,5 @@
     </div>
     <script src="../script.js"></script>
 </body>
+
 </html>

@@ -1,13 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
     <title>MQTT Server with Mosquitto on Raspberry Pi | Abhijith S</title>
-    <meta name="description" content="A guide to setting up an MQTT server with Mosquitto on Raspberry Pi, including dependencies and configuration.">
+    <meta name="description"
+        content="A guide to setting up an MQTT server with Mosquitto on Raspberry Pi, including dependencies and configuration.">
     <link rel="stylesheet" href="../style.css" />
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Ubuntu+Mono&display=swap" rel="stylesheet">
+    <!-- Highlight.js -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/srcery.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
 </head>
+
 <body>
     <div class="container">
         <header class="header-section">
@@ -18,11 +25,14 @@
             <article class="blog-content">
                 <h3>Introduction</h3>
                 <p>
-                    MQTT (Message Queuing Telemetry Transport) is a lightweight messaging protocol ideal for IoT and home automation projects. Setting up an MQTT server on a Raspberry Pi using Mosquitto is a great way to enable device communication on your local network.
+                    MQTT (Message Queuing Telemetry Transport) is a lightweight messaging protocol ideal for IoT and
+                    home automation projects. Setting up an MQTT server on a Raspberry Pi using Mosquitto is a great way
+                    to enable device communication on your local network.
                 </p>
                 <h3>Why Mosquitto?</h3>
                 <p>
-                    Mosquitto is a popular, open-source MQTT broker that's easy to install and configure, especially on resource-constrained devices like the Raspberry Pi.
+                    Mosquitto is a popular, open-source MQTT broker that's easy to install and configure, especially on
+                    resource-constrained devices like the Raspberry Pi.
                 </p>
                 <h3>Prerequisites</h3>
                 <ul>
@@ -33,20 +43,20 @@
                 <h3>Installation Steps</h3>
                 <ol>
                     <li>
-                        <strong>Update your system:</strong><br>
-                        <code>sudo apt update && sudo apt upgrade</code>
+                        <strong>Update your system:</strong>
+                        <pre><code class="language-bash">sudo apt update && sudo apt upgrade</code></pre>
                     </li>
                     <li>
-                        <strong>Install Mosquitto and Mosquitto clients:</strong><br>
-                        <code>sudo apt install mosquitto mosquitto-clients</code>
+                        <strong>Install Mosquitto and Mosquitto clients:</strong>
+                        <pre><code class="language-bash">sudo apt install mosquitto mosquitto-clients</code></pre>
                     </li>
                     <li>
-                        <strong>Enable Mosquitto to start on boot:</strong><br>
-                        <code>sudo systemctl enable mosquitto</code>
+                        <strong>Enable Mosquitto to start on boot:</strong>
+                        <pre><code class="language-bash">sudo systemctl enable mosquitto</code></pre>
                     </li>
                     <li>
-                        <strong>Start the Mosquitto service:</strong><br>
-                        <code>sudo systemctl start mosquitto</code>
+                        <strong>Start the Mosquitto service:</strong>
+                        <pre><code class="language-bash">sudo systemctl start mosquitto</code></pre>
                     </li>
                 </ol>
                 <h3>Testing Your MQTT Server</h3>
@@ -55,12 +65,12 @@
                         <strong>Open two terminal windows.</strong>
                     </li>
                     <li>
-                        <strong>In the first window, subscribe to a topic:</strong><br>
-                        <code>mosquitto_sub -h localhost -t test/topic</code>
+                        <strong>In the first window, subscribe to a topic:</strong>
+                        <pre><code class="language-bash">mosquitto_sub -h localhost -t test/topic</code></pre>
                     </li>
                     <li>
-                        <strong>In the second window, publish a message:</strong><br>
-                        <code>mosquitto_pub -h localhost -t test/topic -m "Hello MQTT!"</code>
+                        <strong>In the second window, publish a message:</strong>
+                        <pre><code class="language-bash">mosquitto_pub -h localhost -t test/topic -m "Hello MQTT!"</code></pre>
                     </li>
                     <li>
                         <strong>You should see the message appear in the first window.</strong>
@@ -68,7 +78,8 @@
                 </ol>
                 <h3>Optional: Securing Your Broker</h3>
                 <ul>
-                    <li>Set up username/password authentication by editing <code>/etc/mosquitto/mosquitto.conf</code>.</li>
+                    <li>Set up username/password authentication by editing <code>/etc/mosquitto/mosquitto.conf</code>.
+                    </li>
                     <li>Enable SSL/TLS for encrypted communication.</li>
                     <li>Restrict access to your local network for security.</li>
                 </ul>
@@ -80,10 +91,13 @@
                 </ul>
                 <h3>Conclusion</h3>
                 <p>
-                    With Mosquitto running on your Raspberry Pi, you now have a reliable MQTT broker for your IoT projects. Experiment with publishing and subscribing to topics, and try integrating with other tools like Node-RED or Grafana for more advanced setups.
+                    With Mosquitto running on your Raspberry Pi, you now have a reliable MQTT broker for your IoT
+                    projects. Experiment with publishing and subscribing to topics, and try integrating with other tools
+                    like Node-RED or Grafana for more advanced setups.
                 </p>
                 <p>
-                    <strong>Questions?</strong> Reach out to me via <a href="mailto:hi@abhiakl.xyz">email</a> or connect on my social links on the main page!
+                    <strong>Questions?</strong> Reach out to me via <a href="mailto:hi@abhiakl.xyz">email</a> or connect
+                    on my social links on the main page!
                 </p>
             </article>
         </main>
@@ -95,4 +109,5 @@
     </div>
     <script src="../script.js"></script>
 </body>
+
 </html>

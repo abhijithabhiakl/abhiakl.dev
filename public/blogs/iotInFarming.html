@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
     <title>IoT in Modern Farming: Smart Agriculture Project | Abhijith S</title>
-    <meta name="description" content="A smart agriculture monitoring system for a high school science festival using ESP32, Blynk, and SIM900A.">
+    <meta name="description"
+        content="A smart agriculture monitoring system for a high school science festival using ESP32, Blynk, and SIM900A.">
     <link rel="stylesheet" href="../style.css" />
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Ubuntu+Mono&display=swap" rel="stylesheet">
     <!-- Highlight.js CSS for GitHub Dark Theme -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+    <!-- Highlight.js CSS for Srcery Theme -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/srcery.min.css">
 </head>
+
 <body>
     <div class="container">
         <header class="header-section">
@@ -20,60 +24,90 @@
             <article class="blog-content">
                 <h3>Project Overview</h3>
                 <p>
-                    For a high school science festival, I developed a smart agriculture monitoring system using an ESP32-CAM, Blynk IoT platform, and a SIM900A GSM module. The project demonstrates how IoT can automate and monitor key environmental factors in farming, making agriculture smarter and more efficient.
+                    For a high school science festival, I developed a smart agriculture monitoring system using an
+                    ESP32-CAM, Blynk IoT platform, and a SIM900A GSM module. The project demonstrates how IoT can
+                    automate and monitor key environmental factors in farming, making agriculture smarter and more
+                    efficient.
                 </p>
-                <h3>Features</h3>
-                <ul>
-                    <li>Monitors soil moisture, pH, rainfall, light, temperature, and humidity</li>
-                    <li>Displays real-time data on an LCD</li>
-                    <li>Remote monitoring via Blynk mobile app</li>
-                    <li>Automatic SMS alerts and sensor data on incoming calls</li>
-                    <li>Automated water pump control based on soil moisture</li>
-                </ul>
-                <h3>Hardware Used</h3>
-                <ul>
-                    <li>ESP32-CAM microcontroller</li>
-                    <li>SIM900A GSM module</li>
-                    <li>DHT11 temperature & humidity sensor</li>
-                    <li>Soil moisture, pH, rain, and light sensors</li>
-                    <li>Relay module for pump control</li>
-                    <li>LiquidCrystal I2C LCD display</li>
-                </ul>
-                <h3>How It Works</h3>
-                <ol>
-                    <li>ESP32 reads sensor data and displays it on the LCD.</li>
-                    <li>Sensor values are sent to the Blynk app for remote monitoring.</li>
-                    <li>On receiving a call, the system sends current sensor data via SMS using SIM900A.</li>
-                    <li>If soil moisture drops below 40%, the relay turns on the water pump automatically.</li>
-                </ol>
-                <h3>Key Code Snippet</h3>
-                <pre><code class="language-cpp">
 
-#define BLYNK_PRINT Serial
-#define BLYNK_TEMPLATE_ID "YOUR_TEMPLATE_ID"
-#define BLYNK_TEMPLATE_NAME "agriMon02"
-#define BLYNK_AUTH_TOKEN "YOUR_AUTH_TOKEN"
-
-#include &lt;Wire.h&gt;
-#include &lt;LiquidCrystal_I2C.h&gt;
-#include &lt;HardwareSerial.h&gt;
-#include &lt;DHT.h&gt;
-#include &lt;BlynkSimpleEsp32.h&gt;
-...
-</code></pre>
-<p>
-    <a href="https://gist.github.com/abhijithabhiakl/06ba39dfe6ed61c86853791f832e5c92" target="_blank" rel="noopener">View full code on GitHub Gist</a>
-</p>
-                <h3>What I Learned</h3>
+                <h3>Hardware Architecture</h3>
+                <p> The system is built around the <strong>ESP32-CAM</strong>, chosen for its Wi-Fi capabilities and
+                    ample GPIOs. It interfaces with a suite of sensors to gather environmental data:</p>
                 <ul>
-                    <li>Integrating multiple sensors and modules with ESP32</li>
-                    <li>Using Blynk for real-time IoT dashboards</li>
-                    <li>Sending SMS and handling calls with SIM900A</li>
-                    <li>Automating irrigation based on live data</li>
+                    <li><strong>ESP32-CAM:</strong> The brain of the operation.</li>
+                    <li><strong>SIM900A GSM Module:</strong> Handles SMS alerts and incoming calls (Connected via
+                        UART1).</li>
+                    <li><strong>Sensors:</strong>
+                        <ul>
+                            <li><strong>DHT11:</strong> Digital temperature & humidity.</li>
+                            <li><strong>Capacitive Soil Moisture:</strong> Analog input (mapped 0-100%).</li>
+                            <li><strong>Rain Sensor, pH Sensor, LDR:</strong> For comprehensive environmental data.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Actuator:</strong> 5V Relay controlling a water pump (Active Low trigger on Pin 4).</li>
+                    <li><strong>Display:</strong> 20x4 I2C LCD for real-time local monitoring.</li>
                 </ul>
+
+                <h3>The Automation Logic</h3>
+                <p>
+                    The core loop runs every 2 seconds, reading all sensor data and converting analog values (0-4095) to
+                    human-readable percentages. The most critical feature is the <strong>automatic irrigation
+                        system</strong>:
+                </p>
+                <pre><code class="language-cpp">// Read sensor values
+int moistureLevel = analogRead(MOISTURE_PIN);
+// Convert 12-bit ADC value to percentage (Inverted: 4095 is dry, 0 is wet)
+int moisturePercentage = map(moistureLevel, 0, 4095, 100, 0);
+
+// Control the relay based on moisture level
+if (moisturePercentage <= 40) {
+    digitalWrite(RELAY_PIN, LOW);  // Turn ON the water pump (Active Low)
+    Serial.println("Relay Status: ON ");
+} else {
+    digitalWrite(RELAY_PIN, HIGH); // Turn OFF the water pump
+    Serial.println("Relay Status: OFF ");
+}</code></pre>
+
+                <h3>GSM Connectivity & Remote Access</h3>
+                <p>
+                    Internet connectivity isn't always reliable on farms. To solve this, I integrated a <strong>SIM900A
+                        GSM module</strong>. The system can listen for incoming calls and respond with an SMS containing
+                    the latest sensor readings.
+                </p>
+                <pre><code class="language-cpp">// Function to send SMS via SIM900A using AT Commands
+void sendSMS(const char* number, const char* message) {
+    String cmd = "AT+CMGS=\"" + String(number) + "\"\r\n";
+    sendATCommand(cmd.c_str(), 1000); // Initiate SMS mode
+    delay(500);
+    sim900.print(message);            // Send the message body
+    delay(500);
+    sim900.write(26);                 // Send Ctrl+Z to finalize
+    Serial.println("SMS sent!");
+}</code></pre>
+
+                <h3>Blynk Integration</h3>
+                <p>
+                    For real-time visual monitoring, the system pushes data to the <strong>Blynk IoT Cloud</strong>
+                    using Virtual Pins. This allows farmers to check the status of their field from anywhere in the
+                    world using the mobile app.
+                </p>
+                <ul>
+                    <li><strong>V0:</strong> Temperature</li>
+                    <li><strong>V1:</strong> Humidity</li>
+                    <li><strong>V2:</strong> Soil Moisture</li>
+                    <li><strong>V3:</strong> Rain Status</li>
+                </ul>
+
                 <h3>Conclusion</h3>
                 <p>
-                    This project was a great introduction to IoT in agriculture and helped demonstrate the power of automation and remote monitoring to students and visitors. If you want to know more or try a similar project, feel free to <a href="mailto:hi@abhiakl.xyz">contact me</a>!
+                    This project was a nice challenge in integrating mixed-signal sensors, GSM communication, and cloud
+                    IoT platforms. It successfully demonstrated how low-cost hardware can solve real-world agricultural
+                    problems. The full source code is available below.
+                </p>
+
+                <p style="margin-top: 20px;">
+                    <a href="https://gist.github.com/abhijithabhiakl/06ba39dfe6ed61c86853791f832e5c92" target="_blank"
+                        rel="noopener"><strong>View Full Source Code on GitHub Gist &rarr;</strong></a>
                 </p>
             </article>
         </main>
@@ -88,4 +122,5 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
     <script>hljs.highlightAll();</script>
 </body>
+
 </html>
